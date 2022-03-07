@@ -2,9 +2,14 @@
 
 import React, { useState } from "react";
 import PDFViewer from "pdf-viewer-reactjs";
+import styled from "styled-components";
 
 const pdfExtension = "application/pdf";
 const pdfBase64PrefixHeader = `data:${pdfExtension};base64,`;
+
+const StyledDiv = styled.div`
+	// custom css
+`;
 
 const FileUpload = () => {
 	const [pdfFile, setPdfFile] = useState({
@@ -30,11 +35,17 @@ const FileUpload = () => {
 		<>
 			<input type="file" onChange={changeHandler} />
 			{pdfFile.base64 && (
-				<PDFViewer
-					document={{
-						base64: pdfFile.base64.split(pdfBase64PrefixHeader)[1],
-					}}
-				/>
+				<StyledDiv>
+					<PDFViewer
+						document={{
+							base64: pdfFile.base64.split(pdfBase64PrefixHeader)[1],
+						}}
+						navbarOnTop={true}
+						scaleStep={0.5}
+						hideRotation={true}
+						protectContent={true}
+					/>
+				</StyledDiv>
 			)}
 		</>
 	);
